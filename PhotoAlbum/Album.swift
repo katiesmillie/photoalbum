@@ -22,7 +22,7 @@ public struct Album {
     }
     
     
-    static func albumsFromItems(items: [PhotoItem]) -> [Album] {
+    static func albumsWithinItems(items: [PhotoItem]) -> [Album] {
         
         // Find a unique set of album ids from all items
         let albumIDs = items.flatMap { $0.albumId }
@@ -39,4 +39,15 @@ public struct Album {
         }
         return albums
     }
+    
+    static func fetchItemsInAlbum(albumId: Int, completion: ([PhotoItem])->()) {
+        
+        PhotoManager.fetchItems { items in
+            // Filter the items for the album id
+            let filteredItems = items.filter { $0.albumId == albumId }
+            // Sort by id of the photo item
+            let selectedAlbumItems = filteredItems.sort { $0.id < $1.id }
+            completion(selectedAlbumItems)
+        }
+       }
 }

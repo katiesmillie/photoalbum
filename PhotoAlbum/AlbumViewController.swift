@@ -13,26 +13,28 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIColle
     @IBOutlet weak var collectionView: UICollectionView?
     
     var allItems: [PhotoItem]?
-    var selectedAlbumItems: [PhotoItem]?
-
+    var selectedAlbumId: Int?
+    
     var albums: [Album] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // TODO: Add a pull to refresh and fetch new images
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(fetchNewItems(_:)), forControlEvents: .ValueChanged)
+        collectionView?.addSubview(refreshControl)
+        
     }
     
-    
-    func fetchNewImages() {
+    func fetchNewItems(refreshControl: UIRefreshControl) {
         PhotoManager.fetchItems { items in
-            let items = PhotoManager.decodeItems(items)
-            let albums = Album.albumsFromItems(items).sort{ $0.albumId < $1.albumId }
+            let albums = Album.albumsWithinItems(items).sort{ $0.albumId < $1.albumId }
             self.allItems = items
             self.albums = albums
+            self.collectionView?.reloadData()
+            refreshControl.endRefreshing()
         }
-        collectionView?.reloadData()
     }
-
     
     func albumAtIndexPath(indexPath: NSIndexPath) -> Album? {
         let index = indexPath.item
@@ -45,13 +47,15 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIColle
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell =  collectionView.dequeueReusableCellWithReuseIdentifier("Album", forIndexPath: indexPath) as! AlbumCollectionViewCell
-        var album = albumAtIndexPath(indexPath)
-        cell.album = album
+        
+        // Set the image to nil so it's not reusing the wrong image
+        cell.albumImage?.image = nil
+        cell.album = albumAtIndexPath(indexPath)
         
         //???: Downloaded case is never called because setting the status on the album property in the cell which is getting recreated and copied each time the view loads
         // Need to update the albums property on self with updated albums
         
-         
+        
         guard let status = cell.album?.coverImage?.status else {return cell }
         switch status {
         case .NotDownloaded:
@@ -60,9 +64,10 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIColle
             // TODO: Create a custom image, 4x4 of first 4 items in album
             guard let urlString = cell.album?.photoItems?.first?.thumbnailURL else { return cell }
             PhotoManager.fetchImage(urlString) { image in
-                album?.coverImage = image
-                album?.coverImage?.status = .Downloaded
+                cell.album?.coverImage = image
+                cell.album?.coverImage?.status = .Downloaded
                 cell.albumImage?.image = image.image
+                cell.spinner?.stopAnimating()
             }
         case .Downloaded:
             cell.albumImage?.image = cell.album?.coverImage?.image
@@ -73,23 +78,24 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIColle
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let album = albums[indexPath.row]
-        
-        // Filter and sort the photo items in the selected album
-        let filteredItems = allItems?.filter { $0.albumId == album.albumId }
-        selectedAlbumItems = filteredItems?.sort { $0.id < $1.id }
+        selectedAlbumId = albums[indexPath.row].albumId
         performSegueWithIdentifier("Open Album", sender: nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let thumbnailViewController = segue.destinationViewController as? ThumbnailViewController {
-            guard let selectedAlbumItems = selectedAlbumItems else { return }
+            guard let selectedAlbumId = selectedAlbumId else { return }
             
-            // Inject the photo items for the selected album into the new view controller
-            thumbnailViewController.photoItems = selectedAlbumItems
+            // Get the new items for the album and inject them
+            let filteredItems = allItems?.filter { $0.albumId == selectedAlbumId }
+            // Sort by id of the photo item
+            let sortedAlbumItems = filteredItems?.sort { $0.id < $1.id }
             
-            // Reset the selected items property
-            self.selectedAlbumItems = nil
+            thumbnailViewController.albumId = selectedAlbumId
+            thumbnailViewController.photoItemsInAlbum = sortedAlbumItems ?? []
+            
+            // Set the property storing the albumId to nil after segue
+            self.selectedAlbumId = nil
         }
     }
     

@@ -14,6 +14,7 @@
 		2D55A9EB1D32A52C0030CF04 /* ThumbnailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D55A9EA1D32A52C0030CF04 /* ThumbnailCollectionViewCell.swift */; };
 		2D55A9ED1D32A5840030CF04 /* ThumbnailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D55A9EC1D32A5840030CF04 /* ThumbnailViewController.swift */; };
 		2D55A9EF1D32AA380030CF04 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D55A9EE1D32AA380030CF04 /* Album.swift */; };
+		2D55A9F11D32D4270030CF04 /* PhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D55A9F01D32D4270030CF04 /* PhotoDetailViewController.swift */; };
 		2DF38CFC1D2EBD2A00910DAC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF38CFB1D2EBD2A00910DAC /* AppDelegate.swift */; };
 		2DF38CFE1D2EBD2A00910DAC /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF38CFD1D2EBD2A00910DAC /* AlbumViewController.swift */; };
 		2DF38D011D2EBD2A00910DAC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DF38CFF1D2EBD2A00910DAC /* Main.storyboard */; };
@@ -48,6 +49,7 @@
 		2D55A9EA1D32A52C0030CF04 /* ThumbnailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailCollectionViewCell.swift; sourceTree = "<group>"; };
 		2D55A9EC1D32A5840030CF04 /* ThumbnailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailViewController.swift; sourceTree = "<group>"; };
 		2D55A9EE1D32AA380030CF04 /* Album.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
+		2D55A9F01D32D4270030CF04 /* PhotoDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewController.swift; sourceTree = "<group>"; };
 		2DF38CF81D2EBD2A00910DAC /* PhotoAlbum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoAlbum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DF38CFB1D2EBD2A00910DAC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2DF38CFD1D2EBD2A00910DAC /* AlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				2D55A9E81D3193C70030CF04 /* RootViewController.swift */,
 				2DF38CFD1D2EBD2A00910DAC /* AlbumViewController.swift */,
 				2D55A9EC1D32A5840030CF04 /* ThumbnailViewController.swift */,
+				2D55A9F01D32D4270030CF04 /* PhotoDetailViewController.swift */,
 				2D55A9E51D31907F0030CF04 /* PhotoManager.swift */,
 				2D55A9E11D2FF70E0030CF04 /* PhotoItem.swift */,
 				2D55A9EE1D32AA380030CF04 /* Album.swift */,
@@ -285,6 +288,7 @@
 				2D55A9EF1D32AA380030CF04 /* Album.swift in Sources */,
 				2D55A9E61D31907F0030CF04 /* PhotoManager.swift in Sources */,
 				2DF38CFC1D2EBD2A00910DAC /* AppDelegate.swift in Sources */,
+				2D55A9F11D32D4270030CF04 /* PhotoDetailViewController.swift in Sources */,
 				2D55A9E21D2FF70E0030CF04 /* PhotoItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -31,7 +31,7 @@ public struct PhotoManager {
     }
     
     
-    static func fetchItems(completion: ([[String: AnyObject]]?)->()) {
+    static func fetchItems(completion: ([PhotoItem])->()) {
         guard let url = NSURL(string: "http://jsonplaceholder.typicode.com/photos") else { return }
         let request = NSMutableURLRequest(URL: url)
         let session = NSURLSession.sharedSession()
@@ -48,7 +48,8 @@ public struct PhotoManager {
                 do {
                     let json = try NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments)
                     if let items = json as? [[String: AnyObject]] {
-                        completion(items)
+                        let decodedItems = PhotoManager.decodeItems(items)
+                        completion(decodedItems)
                     }
                     
                 } catch {
