@@ -49,7 +49,11 @@ public struct PhotoManager {
                     let json = try NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments)
                     if let items = json as? [[String: AnyObject]] {
                         let decodedItems = PhotoManager.decodeItems(items)
-                        completion(decodedItems)
+                        
+                        // Call the completion on the main thread
+                         dispatch_async(dispatch_get_main_queue()) {
+                            completion(decodedItems)
+                        }
                     }
                     
                 } catch {
