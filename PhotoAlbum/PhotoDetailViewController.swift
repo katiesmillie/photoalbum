@@ -60,7 +60,7 @@ class PhotoDetailViewController: UIViewController, UIScrollViewDelegate {
         guard let urlString = photoItem?.imageURL else { return }
         
         PhotoManager.fetchImage(urlString) { image in
-            self.image = image.image
+            self.image = image
         }
     }
     

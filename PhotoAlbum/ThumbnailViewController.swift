@@ -56,20 +56,13 @@ class ThumbnailViewController: UIViewController, UICollectionViewDataSource, UIC
 
         cell.photoItem = itemAtIndexPath(indexPath)
         
-        guard let thumbnailStatus = cell.photoItem?.thumbnailImage?.status  else { return cell }
         
-        switch thumbnailStatus {
-        case .NotDownloaded:
-            guard let urlString = cell.photoItem?.thumbnailURL else { return cell }
+                  guard let urlString = cell.photoItem?.thumbnailURL else { return cell }
             PhotoManager.fetchImage(urlString) { image in
                 cell.photoItem?.thumbnailImage = image
-                cell.photoItem?.thumbnailImage?.status = .Downloaded
-                cell.thumbnailImage?.image = image.image
+                cell.thumbnailImage?.image = image
                 cell.spinner?.stopAnimating()
             }
-        case .Downloaded:
-            cell.thumbnailImage?.image = cell.photoItem?.thumbnailImage?.image
-        }
         
         return cell
     }

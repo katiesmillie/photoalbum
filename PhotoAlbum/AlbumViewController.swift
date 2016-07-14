@@ -57,26 +57,15 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIColle
         cell.albumImage?.image = nil
         cell.album = albumAtIndexPath(indexPath)
         
-        //???: Downloaded case is never called because setting the status on the album property in the cell which is getting recreated and copied each time the view loads
-        // Need to update the albums property on self with updated albums
-        
-        
-        guard let status = cell.album?.coverImage?.status else {return cell }
-        switch status {
-        case .NotDownloaded:
-            
-            // For now, use the first thumbnail in the album
-            // TODO: Create a custom image, 4x4 of first 4 items in album
-            guard let urlString = cell.album?.photoItems?.first?.thumbnailURL else { return cell }
-            PhotoManager.fetchImage(urlString) { image in
-                cell.album?.coverImage = image
-                cell.album?.coverImage?.status = .Downloaded
-                cell.albumImage?.image = image.image
-                cell.spinner?.stopAnimating()
-            }
-        case .Downloaded:
-            cell.albumImage?.image = cell.album?.coverImage?.image
+        // For now, use the first thumbnail in the album
+        // TODO: Create a custom image, 4x4 of first 4 items in album
+        guard let urlString = cell.album?.photoItems?.first?.thumbnailURL else { return cell }
+        PhotoManager.fetchImage(urlString) { image in
+            cell.album?.coverImage = image
+            cell.albumImage?.image = image
+            cell.spinner?.stopAnimating()
         }
+        
         
         return cell
         

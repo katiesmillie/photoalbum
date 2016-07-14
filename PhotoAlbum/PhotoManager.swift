@@ -61,14 +61,14 @@ public struct PhotoManager {
     }
     
     
-    static func fetchImage(urlString: String, completion: (Image)->()) {
+    static func fetchImage(urlString: String, completion: (UIImage)->()) {
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             guard let url = NSURL(string: urlString) else { return }
             guard let imageData = NSData(contentsOfURL: url) else { return }
             
             dispatch_async(dispatch_get_main_queue()) {
-                let image = Image(status: .Downloaded, image: UIImage(data: imageData))
+                guard let image = UIImage(data: imageData) else { return }
                 completion(image)
             }
         }

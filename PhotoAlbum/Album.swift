@@ -7,22 +7,24 @@
 //
 
 import Foundation
+import UIKit
+
 
 public struct Album {
     let albumId: Int?
     let photoItems: [PhotoItem]?
-    var coverImage: Image?
+    var coverImage: UIImage?
     
     
     // Set coverImage as .NotDownloaded and nil by default
-    init(albumId: Int, photoItems: [PhotoItem], coverImage: Image? = Image(status: .NotDownloaded, image: nil)) {
+    init(albumId: Int, photoItems: [PhotoItem], coverImage: UIImage? = nil) {
         self.albumId = albumId
         self.photoItems = photoItems.sort{ $0.id < $1.id }
         self.coverImage = coverImage
     }
     
     
-    static func albumsWithinItems(items: [PhotoItem]) -> [Album] {
+    static func getAlbumsFromItems(items: [PhotoItem]) -> [Album] {
         
         // Find a unique set of album ids from all items
         let albumIDs = items.flatMap { $0.albumId }

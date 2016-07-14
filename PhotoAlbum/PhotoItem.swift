@@ -9,40 +9,47 @@
 import Foundation
 import UIKit
 
-public enum Status {
-    case NotDownloaded
-    case Downloaded
-}
 
-public struct Image {
-    var status: Status?
-    let image: UIImage?
-    
-    init(status: Status?, image: UIImage?) {
-        self.status = status
-        self.image = image
-    }
-}
+
+// TODO: Cache photos and keep track of their state
+
+//public struct Image {
+//    
+//    public enum Status {
+//        case NotDownloaded
+//        case Downloaded
+//        case Failed
+//    }
+//    
+//    var status: Status?
+//    let image: UIImage?
+//    
+//    init(status: Status?, image: UIImage?) {
+//        self.status = status
+//        self.image = image
+//    }
+//}
 
 
 public struct PhotoItem {
     let albumId: Int?
     let id: Int?
     let title: String?
-    let thumbnailURL: String?
     let imageURL: String?
-    var thumbnailImage: Image?
-    var fullImage: Image?
+    let thumbnailURL: String?
+    var fullImage: UIImage?
+    var thumbnailImage: UIImage?
+
     
     // Set the Images as .NotDownloaded and nil by default
-    public init(albumId: Int, id: Int,title: String, thumbnailURL: String, imageURL: String, thumbnailImage: Image? = Image(status: .NotDownloaded, image: nil), fullImage: Image? = Image(status: .NotDownloaded, image: nil) ) {
+    public init(albumId: Int, id: Int,title: String, imageURL: String, thumbnailURL: String, fullImage: UIImage? = nil, thumbnailImage: UIImage? = nil) {
         self.albumId = albumId
         self.id = id
         self.title = title
-        self.thumbnailURL = thumbnailURL
         self.imageURL = imageURL
-        self.thumbnailImage = thumbnailImage
+        self.thumbnailURL = thumbnailURL
         self.fullImage = fullImage
+        self.thumbnailImage = thumbnailImage
     }
     
     
