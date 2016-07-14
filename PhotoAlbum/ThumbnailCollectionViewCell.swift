@@ -27,6 +27,5 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
             thumbnailImage?.setBorderForImages()
         }
     }
-
     
 }

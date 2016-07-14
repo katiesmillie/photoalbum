@@ -9,7 +9,7 @@
 import UIKit
 
 class ThumbnailViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate  {
-
+    
     @IBOutlet weak var collectionView: UICollectionView?
     
     var albumId: Int?
@@ -29,7 +29,6 @@ class ThumbnailViewController: UIViewController, UICollectionViewDataSource, UIC
         let layout = UICollectionViewFlowLayout()
         layout.setLayoutForAlbums()
         collectionView?.collectionViewLayout = layout
-        
     }
     
     func fetchNewItems(refreshControl: UIRefreshControl) {
@@ -40,7 +39,6 @@ class ThumbnailViewController: UIViewController, UICollectionViewDataSource, UIC
             refreshControl.endRefreshing()
         }
     }
-    
     
     func itemAtIndexPath(indexPath: NSIndexPath) -> PhotoItem? {
         let index = indexPath.item
@@ -53,39 +51,34 @@ class ThumbnailViewController: UIViewController, UICollectionViewDataSource, UIC
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell =  collectionView.dequeueReusableCellWithReuseIdentifier("Thumbnail", forIndexPath: indexPath) as! ThumbnailCollectionViewCell
-
+        
         // Set the thumbnail image to nil
         cell.thumbnailImage?.image = nil
-
         cell.photoItem = itemAtIndexPath(indexPath)
         
-        
-                  guard let urlString = cell.photoItem?.thumbnailURL else { return cell }
-            PhotoManager.fetchImage(urlString) { image in
-                cell.photoItem?.thumbnailImage = image
-                cell.thumbnailImage?.image = image
-                cell.spinner?.stopAnimating()
-            }
-        
+        guard let urlString = cell.photoItem?.thumbnailURL else { return cell }
+        PhotoManager.fetchImage(urlString) { image in
+            cell.photoItem?.thumbnailImage = image
+            cell.thumbnailImage?.image = image
+            cell.spinner?.stopAnimating()
+        }
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-    
         // Store the selected Photo Item
         selectedPhotoItem = photoItemsInAlbum[indexPath.row]
         performSegueWithIdentifier("Open Photo", sender: nil)
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        
         let margins = collectionView.layoutMargins.right + collectionView.layoutMargins.left
         let cellWidth = (collectionView.frame.width / 2) - margins
+        
         // This is a naive way to handle
         // TODO: determine height addition with apsect ratio of cell
         let roomForLabel: CGFloat = 40
         return CGSize(width: cellWidth, height: cellWidth + roomForLabel)
-        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -99,6 +92,5 @@ class ThumbnailViewController: UIViewController, UICollectionViewDataSource, UIC
             self.selectedPhotoItem = nil
         }
     }
-
     
 }

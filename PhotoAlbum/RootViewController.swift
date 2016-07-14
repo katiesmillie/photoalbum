@@ -12,13 +12,11 @@ class RootViewController: UIViewController {
     
     private var currentViewController: UIViewController?
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         showLoadingUI()
         showMainUI()
     }
-    
     
     func embedViewController(viewController: UIViewController) {
         removePreviousViewController()
@@ -37,7 +35,6 @@ class RootViewController: UIViewController {
         currentViewController.willMoveToParentViewController(nil)
         currentViewController.view.removeFromSuperview()
         currentViewController.removeFromParentViewController()
-        
     }
     
     internal func showLoadingUI() {

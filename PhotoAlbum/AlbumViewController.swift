@@ -27,8 +27,6 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIColle
         let layout = UICollectionViewFlowLayout()
         layout.setLayoutForAlbums()
         collectionView?.collectionViewLayout = layout
-
-        
     }
     
     func fetchNewItems(refreshControl: UIRefreshControl) {
@@ -66,9 +64,7 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIColle
             cell.spinner?.stopAnimating()
         }
         
-        
         return cell
-        
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
@@ -77,7 +73,6 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIColle
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        
         let margins = collectionView.layoutMargins.right + collectionView.layoutMargins.left
         let cellWidth = (collectionView.frame.width / 2) - margins
         
@@ -96,7 +91,6 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIColle
             let filteredItems = allItems?.filter { $0.albumId == selectedAlbumId }
             // Sort by id of the photo item
             let sortedAlbumItems = filteredItems?.sort { $0.id < $1.id }
-            
             thumbnailViewController.albumId = selectedAlbumId
             thumbnailViewController.photoItemsInAlbum = sortedAlbumItems ?? []
             

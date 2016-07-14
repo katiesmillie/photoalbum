@@ -12,8 +12,8 @@ import UIKit
 extension UICollectionViewFlowLayout {
     
     func setLayoutForAlbums() {
-
         sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 10, right:10)
         minimumInteritemSpacing = 0
     }
+    
 }

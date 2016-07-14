@@ -15,7 +15,7 @@ class PhotoDetailViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var photoTitle: UILabel?
     @IBOutlet weak var spinner: UIActivityIndicatorView? {
         didSet {
-            self.spinner?.hidesWhenStopped = true
+            spinner?.hidesWhenStopped = true
         }
     }
 
@@ -44,13 +44,12 @@ class PhotoDetailViewController: UIViewController, UIScrollViewDelegate {
             imageView.frame = CGRectMake(0, 0, imageWidth, imageWidth)
             scrollView?.contentSize = imageView.frame.size
             
-            self.spinner?.stopAnimating()
+            spinner?.stopAnimating()
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         scrollView?.addSubview(imageView)
 
         guard let photoTitleText = photoItem?.title else { return }

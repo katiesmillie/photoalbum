@@ -25,10 +25,8 @@ public struct PhotoManager {
             let photoItem = PhotoItem(albumId: albumId, id: id, title: title, imageURL: imageURL, thumbnailURL: thumbnailURL)
             photoItems += [photoItem]
         }
-        
         return photoItems
     }
-    
     
     static func fetchItems(completion: ([PhotoItem])->()) {
         guard let url = NSURL(string: "http://jsonplaceholder.typicode.com/photos") else { return }
@@ -50,7 +48,7 @@ public struct PhotoManager {
                         let decodedItems = PhotoManager.decodeItems(items)
                         
                         // Call the completion on the main thread
-                         dispatch_async(dispatch_get_main_queue()) {
+                        dispatch_async(dispatch_get_main_queue()) {
                             completion(decodedItems)
                         }
                     }
@@ -62,7 +60,6 @@ public struct PhotoManager {
         }
         task.resume()
     }
-    
     
     static func fetchImage(urlString: String, completion: (UIImage)->()) {
         
@@ -76,5 +73,5 @@ public struct PhotoManager {
             }
         }
     }
-
+    
 }

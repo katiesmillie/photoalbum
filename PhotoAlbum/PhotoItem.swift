@@ -9,28 +9,6 @@
 import Foundation
 import UIKit
 
-
-
-// TODO: Cache photos and keep track of their state
-
-//public struct Image {
-//    
-//    public enum Status {
-//        case NotDownloaded
-//        case Downloaded
-//        case Failed
-//    }
-//    
-//    var status: Status?
-//    let image: UIImage?
-//    
-//    init(status: Status?, image: UIImage?) {
-//        self.status = status
-//        self.image = image
-//    }
-//}
-
-
 public struct PhotoItem {
     let albumId: Int?
     let id: Int?
@@ -39,7 +17,7 @@ public struct PhotoItem {
     let thumbnailURL: String?
     var fullImage: UIImage?
     var thumbnailImage: UIImage?
-
+    
     
     // Set the Images as .NotDownloaded and nil by default
     public init(albumId: Int, id: Int,title: String, imageURL: String, thumbnailURL: String, fullImage: UIImage? = nil, thumbnailImage: UIImage? = nil) {
@@ -62,3 +40,23 @@ public func ==(lhs: PhotoItem, rhs: PhotoItem) -> Bool {
 }
 
 extension PhotoItem: Equatable {}
+
+
+// TODO: Cache photos and keep track of their
+// state using custom Image type
+
+public struct Image {
+    public enum Status {
+        case NotDownloaded
+        case Downloaded
+        case Failed
+    }
+    
+    var status: Status?
+    let image: UIImage?
+    
+    init(status: Status?, image: UIImage?) {
+        self.status = status
+        self.image = image
+    }
+}

@@ -9,12 +9,10 @@
 import Foundation
 import UIKit
 
-
 public struct Album {
     let albumId: Int?
     let photoItems: [PhotoItem]?
     var coverImage: UIImage?
-    
     
     // Set coverImage as .NotDownloaded and nil by default
     init(albumId: Int, photoItems: [PhotoItem], coverImage: UIImage? = nil) {
@@ -23,14 +21,12 @@ public struct Album {
         self.coverImage = coverImage
     }
     
-    
     static func getAlbumsFromItems(items: [PhotoItem]) -> [Album] {
         
         // Find a unique set of album ids from all items
         let albumIDs = items.flatMap { $0.albumId }
         let uniqueAlbumsSet = Set(albumIDs)
         let uniqueAlbumID = uniqueAlbumsSet.flatMap { Int($0) }
-        
         
         // For each album id, get all photo items
         // Then create an ablum, and add it to the array of albums
@@ -43,7 +39,6 @@ public struct Album {
     }
     
     static func fetchItemsInAlbum(albumId: Int, completion: ([PhotoItem])->()) {
-        
         PhotoManager.fetchItems { items in
             // Filter the items for the album id
             let filteredItems = items.filter { $0.albumId == albumId }
@@ -51,5 +46,5 @@ public struct Album {
             let selectedAlbumItems = filteredItems.sort { $0.id < $1.id }
             completion(selectedAlbumItems)
         }
-       }
+    }
 }
