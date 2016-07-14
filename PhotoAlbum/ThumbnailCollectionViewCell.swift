@@ -23,7 +23,8 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
         didSet {
             spinner?.startAnimating()
             guard let photoTitle = photoItem?.title else { return }
-            title?.text = "Album \(photoTitle)"
+            title?.text =  "\(photoTitle)".capitalizedString
+            thumbnailImage?.setBorderForImages()
         }
     }
 

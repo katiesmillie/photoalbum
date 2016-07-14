@@ -21,10 +21,10 @@ class AlbumCollectionViewCell: UICollectionViewCell {
     
     var album: Album? {
         didSet {
-            
             spinner?.startAnimating()
             guard let albumId = album?.albumId else { return }
             albumTitle?.text = "Album \(albumId)"
+            albumImage?.setBorderForImages()
         }
     }
     

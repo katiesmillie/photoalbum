@@ -34,6 +34,7 @@ class PhotoDetailViewController: UIViewController, UIScrollViewDelegate {
         set {
             imageView.image = newValue
             imageView.sizeToFit()
+            imageView.setBorderForImages()
             scrollView?.contentSize = imageView.frame.size
             self.spinner?.stopAnimating()
         }
