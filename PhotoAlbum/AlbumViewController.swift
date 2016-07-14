@@ -19,14 +19,21 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIColle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        configureRefresh()
+        setLayout()
+    }
+    
+    func configureRefresh() {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(fetchNewItems(_:)), forControlEvents: .ValueChanged)
         collectionView?.addSubview(refreshControl)
-        
+    }
+    
+    func setLayout() {
+        guard let collectionView = collectionView else { return }
         let layout = UICollectionViewFlowLayout()
-        layout.setLayoutForAlbums()
-        collectionView?.collectionViewLayout = layout
+        layout.setCustomLayoutForCollection(collectionView)
+        collectionView.collectionViewLayout = layout
     }
     
     func fetchNewItems(refreshControl: UIRefreshControl) {
@@ -86,9 +93,11 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIColle
         performSegueWithIdentifier("Open Album", sender: nil)
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         let margins = collectionView.layoutMargins.right + collectionView.layoutMargins.left
-        let cellWidth = (collectionView.frame.width / 2) - margins
+        
+        // Use 2 columns for portrait, 3 for landscape
+        let cellWidth = UIDevice.currentDevice().orientation.isLandscape ? (collectionView.frame.width / 3) - margins : (collectionView.frame.width / 2) - margins
         
         // This is a naive way to handle
         // TODO: determine height needed by finding apsect ratio of cell

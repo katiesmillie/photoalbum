@@ -21,6 +21,10 @@ public struct Album {
         self.coverImage = coverImage
     }
     
+    // TODO: Create a custom image for album cover
+    // so that it looks more like an album
+    // e.g. 4x4 grid of thumbnails, or stack like in Photos app
+    
     static func getAlbumsFromItems(items: [PhotoItem]) -> [Album] {
         
         // Find a unique set of album ids from all items

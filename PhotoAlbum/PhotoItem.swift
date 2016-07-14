@@ -40,23 +40,3 @@ public func ==(lhs: PhotoItem, rhs: PhotoItem) -> Bool {
 }
 
 extension PhotoItem: Equatable {}
-
-
-// TODO: Cache photos and keep track of their
-// state using custom Image type
-
-public struct Image {
-    public enum Status {
-        case NotDownloaded
-        case Downloaded
-        case Failed
-    }
-    
-    var status: Status?
-    let image: UIImage?
-    
-    init(status: Status?, image: UIImage?) {
-        self.status = status
-        self.image = image
-    }
-}

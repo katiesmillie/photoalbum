@@ -27,6 +27,5 @@ class AlbumCollectionViewCell: UICollectionViewCell {
             albumImage?.setBorderForImages()
         }
     }
-  
     
 }
