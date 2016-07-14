@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xuJ-Rn-sdA">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Loading View Controller-->
+        <scene sceneID="SG1-y9-ril">
+            <objects>
+                <viewController id="xuJ-Rn-sdA" customClass="LoadingViewController" customModule="PhotoAlbum" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ute-59-VAt"/>
+                        <viewControllerLayoutGuide type="bottom" id="SKf-0d-E6H"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OQK-FT-hV5">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="vzG-8A-A7e">
+                                <rect key="frame" x="290" y="290" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading Photos..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o7t-oo-PEJ">
+                                <rect key="frame" x="206" y="220" width="189" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="25"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="vzG-8A-A7e" firstAttribute="top" secondItem="o7t-oo-PEJ" secondAttribute="bottom" constant="40" id="2sQ-9p-LcG"/>
+                            <constraint firstItem="o7t-oo-PEJ" firstAttribute="top" secondItem="Ute-59-VAt" secondAttribute="bottom" constant="200" id="LKv-Al-dTP"/>
+                            <constraint firstItem="o7t-oo-PEJ" firstAttribute="top" secondItem="Ute-59-VAt" secondAttribute="bottom" constant="160" id="PNU-Qw-Zfi"/>
+                            <constraint firstItem="vzG-8A-A7e" firstAttribute="centerX" secondItem="OQK-FT-hV5" secondAttribute="centerX" id="Q0A-qn-A4t"/>
+                            <constraint firstItem="vzG-8A-A7e" firstAttribute="centerY" secondItem="OQK-FT-hV5" secondAttribute="centerY" id="aaB-5c-OQL"/>
+                            <constraint firstItem="o7t-oo-PEJ" firstAttribute="centerX" secondItem="OQK-FT-hV5" secondAttribute="centerX" id="fs6-YP-VqE"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="PNU-Qw-Zfi"/>
+                                <exclude reference="aaB-5c-OQL"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="spinner" destination="vzG-8A-A7e" id="EMr-PG-hiv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WpN-of-EVt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="530" y="266"/>
+        </scene>
+    </scenes>
+</document>
