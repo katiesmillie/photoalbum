@@ -33,7 +33,7 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIColle
     
     func fetchNewItems(refreshControl: UIRefreshControl) {
         PhotoManager.fetchItems { items in
-            let albums = Album.albumsWithinItems(items).sort{ $0.albumId < $1.albumId }
+            let albums = Album.getAlbumsFromItems(items).sort{ $0.albumId < $1.albumId }
             self.allItems = items
             self.albums = albums
             self.collectionView?.reloadData()
@@ -74,6 +74,18 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIColle
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         selectedAlbumId = albums[indexPath.row].albumId
         performSegueWithIdentifier("Open Album", sender: nil)
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        
+        let margins = collectionView.layoutMargins.right + collectionView.layoutMargins.left
+        let cellWidth = (collectionView.frame.width / 2) - margins
+        
+        // This is a naive way to handle
+        // TODO: determine height addition with apsect ratio of cell
+        let roomForLabel: CGFloat = 40
+        return CGSize(width: cellWidth, height: cellWidth + roomForLabel)
+        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

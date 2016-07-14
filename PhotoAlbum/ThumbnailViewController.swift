@@ -23,6 +23,9 @@ class ThumbnailViewController: UIViewController, UICollectionViewDataSource, UIC
         refreshControl.addTarget(self, action: #selector(fetchNewItems(_:)), forControlEvents: .ValueChanged)
         collectionView?.addSubview(refreshControl)
         
+        guard let albumId = albumId else { return }
+        self.title = "Album \(albumId)"
+        
         let layout = UICollectionViewFlowLayout()
         layout.setLayoutForAlbums()
         collectionView?.collectionViewLayout = layout
@@ -72,6 +75,17 @@ class ThumbnailViewController: UIViewController, UICollectionViewDataSource, UIC
         // Store the selected Photo Item
         selectedPhotoItem = photoItemsInAlbum[indexPath.row]
         performSegueWithIdentifier("Open Photo", sender: nil)
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        
+        let margins = collectionView.layoutMargins.right + collectionView.layoutMargins.left
+        let cellWidth = (collectionView.frame.width / 2) - margins
+        // This is a naive way to handle
+        // TODO: determine height addition with apsect ratio of cell
+        let roomForLabel: CGFloat = 40
+        return CGSize(width: cellWidth, height: cellWidth + roomForLabel)
+        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
