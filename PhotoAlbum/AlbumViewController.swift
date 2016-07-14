@@ -56,8 +56,11 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIColle
         cell.album = albumAtIndexPath(indexPath)
         
         // For now, use the first thumbnail in the album
-        // TODO: Create a custom image, 4x4 of first 4 items in album
         guard let urlString = cell.album?.photoItems?.first?.thumbnailURL else { return cell }
+        
+        // TODO: Create a custom image to better show it's an album
+        // e.g. 4x4 of first 4 items in album, or stack
+       
         PhotoManager.fetchImage(urlString) { image in
             cell.album?.coverImage = image
             cell.albumImage?.image = image
@@ -77,7 +80,7 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIColle
         let cellWidth = (collectionView.frame.width / 2) - margins
         
         // This is a naive way to handle
-        // TODO: determine height addition with apsect ratio of cell
+        // TODO: determine height needed by finding apsect ratio of cell
         let roomForLabel: CGFloat = 40
         return CGSize(width: cellWidth, height: cellWidth + roomForLabel)
         

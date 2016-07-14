@@ -33,7 +33,6 @@ class PhotoDetailViewController: UIViewController, UIScrollViewDelegate {
     private var image : UIImage? {
         get {
             return imageView.image
-            
         }
         set {
             imageView.image = newValue
@@ -73,5 +72,7 @@ class PhotoDetailViewController: UIViewController, UIScrollViewDelegate {
     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
         return imageView
     }
-
+    
+    // TODO: Add tap gesture and display image in full screen
+    
 }

@@ -98,6 +98,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2DBEFEBA1D37CE400071ED9F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2DBEFEB41D36C4FA0071ED9F /* LoadingViewController.swift */,
+				2DF38CFD1D2EBD2A00910DAC /* AlbumViewController.swift */,
+				2D55A9EC1D32A5840030CF04 /* ThumbnailViewController.swift */,
+				2D55A9F01D32D4270030CF04 /* PhotoDetailViewController.swift */,
+				2D55A9E31D3013280030CF04 /* AlbumCollectionViewCell.swift */,
+				2D55A9EA1D32A52C0030CF04 /* ThumbnailCollectionViewCell.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		2DBEFEBB1D37CE680071ED9F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2DBEFEB61D36CEB40071ED9F /* UIImageView+Extension.swift */,
+				2DBEFEB81D37C5F80071ED9F /* UICollectionViewFlowLayout+Extension.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		2DBEFEBC1D37CE790071ED9F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2D55A9E11D2FF70E0030CF04 /* PhotoItem.swift */,
+				2D55A9EE1D32AA380030CF04 /* Album.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		2DF38CEF1D2EBD2A00910DAC = {
 			isa = PBXGroup;
 			children = (
@@ -123,17 +154,10 @@
 			children = (
 				2DF38CFB1D2EBD2A00910DAC /* AppDelegate.swift */,
 				2D55A9E81D3193C70030CF04 /* RootViewController.swift */,
-				2DBEFEB41D36C4FA0071ED9F /* LoadingViewController.swift */,
-				2DF38CFD1D2EBD2A00910DAC /* AlbumViewController.swift */,
-				2D55A9E31D3013280030CF04 /* AlbumCollectionViewCell.swift */,
-				2D55A9EC1D32A5840030CF04 /* ThumbnailViewController.swift */,
-				2D55A9EA1D32A52C0030CF04 /* ThumbnailCollectionViewCell.swift */,
-				2D55A9F01D32D4270030CF04 /* PhotoDetailViewController.swift */,
-				2DBEFEB61D36CEB40071ED9F /* UIImageView+Extension.swift */,
-				2DBEFEB81D37C5F80071ED9F /* UICollectionViewFlowLayout+Extension.swift */,
+				2DBEFEBA1D37CE400071ED9F /* View */,
+				2DBEFEBB1D37CE680071ED9F /* Extensions */,
+				2DBEFEBC1D37CE790071ED9F /* Model */,
 				2D55A9E51D31907F0030CF04 /* PhotoManager.swift */,
-				2D55A9E11D2FF70E0030CF04 /* PhotoItem.swift */,
-				2D55A9EE1D32AA380030CF04 /* Album.swift */,
 				2DF38CFF1D2EBD2A00910DAC /* Main.storyboard */,
 				2DBEFEB21D36C4CB0071ED9F /* Loading.storyboard */,
 				2DF38D041D2EBD2A00910DAC /* LaunchScreen.storyboard */,
