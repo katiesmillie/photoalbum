@@ -223,7 +223,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="tJk-kJ-CSV">
-                                <rect key="frame" x="20" y="64" width="560" height="592"/>
+                                <rect key="frame" x="20" y="64" width="560" height="486"/>
                             </activityIndicatorView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="53r-xS-6Re">
                                 <rect key="frame" x="20" y="80" width="560" height="560"/>
@@ -243,29 +243,17 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="tec-v5-f3w" firstAttribute="top" secondItem="au8-83-9rP" secondAttribute="bottom" constant="30" id="8ab-qv-3tU"/>
+                            <constraint firstItem="0If-pR-KEb" firstAttribute="top" secondItem="tJk-kJ-CSV" secondAttribute="bottom" constant="50" id="Dop-YB-Tbn"/>
                             <constraint firstItem="53r-xS-6Re" firstAttribute="top" secondItem="au8-83-9rP" secondAttribute="bottom" constant="16" id="Okd-RW-KPc"/>
                             <constraint firstItem="tec-v5-f3w" firstAttribute="trailing" secondItem="53r-xS-6Re" secondAttribute="trailing" id="Pt8-eG-cvG"/>
                             <constraint firstAttribute="trailingMargin" secondItem="53r-xS-6Re" secondAttribute="trailing" id="UMX-R3-UYB"/>
                             <constraint firstItem="tec-v5-f3w" firstAttribute="leading" secondItem="53r-xS-6Re" secondAttribute="leading" id="Zhx-h7-oGF"/>
-                            <constraint firstItem="0If-pR-KEb" firstAttribute="top" secondItem="tec-v5-f3w" secondAttribute="bottom" id="aGc-24-K08"/>
                             <constraint firstItem="tJk-kJ-CSV" firstAttribute="top" secondItem="au8-83-9rP" secondAttribute="bottom" id="cWq-HR-1SB"/>
-                            <constraint firstItem="53r-xS-6Re" firstAttribute="centerY" secondItem="1D7-dJ-p60" secondAttribute="centerY" id="fR1-kV-Tuk"/>
                             <constraint firstItem="53r-xS-6Re" firstAttribute="leading" secondItem="1D7-dJ-p60" secondAttribute="leadingMargin" id="fuA-O6-blQ"/>
                             <constraint firstItem="tec-v5-f3w" firstAttribute="top" secondItem="53r-xS-6Re" secondAttribute="bottom" constant="8" id="h6G-Sf-5GC"/>
                             <constraint firstItem="tJk-kJ-CSV" firstAttribute="leading" secondItem="1D7-dJ-p60" secondAttribute="leadingMargin" id="hWD-P7-A3V"/>
-                            <constraint firstItem="tJk-kJ-CSV" firstAttribute="centerY" secondItem="53r-xS-6Re" secondAttribute="centerY" id="qjW-V0-DXo"/>
                             <constraint firstItem="tJk-kJ-CSV" firstAttribute="centerX" secondItem="53r-xS-6Re" secondAttribute="centerX" id="tou-2K-hS6"/>
-                            <constraint firstItem="53r-xS-6Re" firstAttribute="top" secondItem="tec-v5-f3w" secondAttribute="bottom" id="uHb-cr-8rf"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="fR1-kV-Tuk"/>
-                                <exclude reference="uHb-cr-8rf"/>
-                                <exclude reference="8ab-qv-3tU"/>
-                                <exclude reference="aGc-24-K08"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="photoTitle" destination="tec-v5-f3w" id="zIQ-ce-y5h"/>

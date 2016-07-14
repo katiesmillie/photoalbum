@@ -18,7 +18,7 @@ class PhotoDetailViewController: UIViewController, UIScrollViewDelegate {
             spinner?.hidesWhenStopped = true
         }
     }
-
+    
     @IBOutlet weak var scrollView: UIScrollView? {
         didSet {
             scrollView?.contentSize = imageView.frame.size
@@ -38,19 +38,29 @@ class PhotoDetailViewController: UIViewController, UIScrollViewDelegate {
             imageView.image = newValue
             imageView.setBorderForImages()
             
+            // if the device is in landscape
+            // use the screen height for width
+            // otherwise use screen width
+            
+            let margin: CGFloat = 40
+            
+            let imageWidth = UIDevice.currentDevice().orientation.isLandscape ? UIScreen.mainScreen().bounds.height - margin : UIScreen.mainScreen().bounds.width
+
             // resize the image to the scroll view's width
-            guard let imageWidth = scrollView?.frame.width else { return }
             imageView.frame = CGRectMake(0, 0, imageWidth, imageWidth)
             scrollView?.contentSize = imageView.frame.size
-            
             spinner?.stopAnimating()
+            
+            // TODO: Change the layout for the
+            // photo title so it's visible in landscape
+         
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView?.addSubview(imageView)
-
+        
         guard let photoTitleText = photoItem?.title else { return }
         self.photoTitle?.text = photoTitleText.capitalizedString
     }
@@ -68,7 +78,7 @@ class PhotoDetailViewController: UIViewController, UIScrollViewDelegate {
             self.image = image
         }
     }
-    
+
     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
         return imageView
     }
