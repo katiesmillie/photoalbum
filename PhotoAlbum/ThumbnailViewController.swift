@@ -23,6 +23,10 @@ class ThumbnailViewController: UIViewController, UICollectionViewDataSource, UIC
         refreshControl.addTarget(self, action: #selector(fetchNewItems(_:)), forControlEvents: .ValueChanged)
         collectionView?.addSubview(refreshControl)
         
+        let layout = UICollectionViewFlowLayout()
+        layout.setLayoutForAlbums()
+        collectionView?.collectionViewLayout = layout
+        
     }
     
     func fetchNewItems(refreshControl: UIRefreshControl) {
