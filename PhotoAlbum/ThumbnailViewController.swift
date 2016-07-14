@@ -14,6 +14,8 @@ class ThumbnailViewController: UIViewController, UICollectionViewDataSource, UIC
     
     var albumId: Int?
     var photoItemsInAlbum: [PhotoItem] = []
+    var cachedImages: [String:UIImage] = [:]
+
     var selectedPhotoItem: PhotoItem?
     
     override func viewDidLoad() {
@@ -32,6 +34,10 @@ class ThumbnailViewController: UIViewController, UICollectionViewDataSource, UIC
     }
     
     func fetchNewItems(refreshControl: UIRefreshControl) {
+        // Clear our cached images & items array
+        cachedImages = [:]
+        photoItemsInAlbum = []
+        
         guard let albumId = albumId else { return }
         Album.fetchItemsInAlbum(albumId) { items in
             self.photoItemsInAlbum = items
@@ -57,10 +63,20 @@ class ThumbnailViewController: UIViewController, UICollectionViewDataSource, UIC
         cell.photoItem = itemAtIndexPath(indexPath)
         
         guard let urlString = cell.photoItem?.thumbnailURL else { return cell }
-        PhotoManager.fetchImage(urlString) { image in
+
+        // Check to see if we've already cached the image
+        if let image = cachedImages[urlString] {
             cell.photoItem?.thumbnailImage = image
             cell.thumbnailImage?.image = image
             cell.spinner?.stopAnimating()
+        // Otherwise get the image
+        } else {
+            PhotoManager.fetchImage(urlString) { image in
+                self.cachedImages[urlString] = image
+                cell.photoItem?.thumbnailImage = image
+                cell.thumbnailImage?.image = image
+                cell.spinner?.stopAnimating()
+            }
         }
         return cell
     }

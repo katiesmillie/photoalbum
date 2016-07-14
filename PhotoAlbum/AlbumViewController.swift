@@ -13,10 +13,10 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIColle
     @IBOutlet weak var collectionView: UICollectionView?
     
     var allItems: [PhotoItem]?
-    var selectedAlbumId: Int?
-    
     var albums: [Album] = []
-    
+    var cachedImages: [String:UIImage] = [:]
+    var selectedAlbumId: Int?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,6 +30,12 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIColle
     }
     
     func fetchNewItems(refreshControl: UIRefreshControl) {
+        // Clear our cached images, items array, and albums array
+        cachedImages = [:]
+        allItems = []
+        albums = []
+        
+        // Then fetch new items
         PhotoManager.fetchItems { items in
             let albums = Album.getAlbumsFromItems(items).sort{ $0.albumId < $1.albumId }
             self.allItems = items
@@ -58,15 +64,20 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIColle
         // For now, use the first thumbnail in the album
         guard let urlString = cell.album?.photoItems?.first?.thumbnailURL else { return cell }
         
-        // TODO: Create a custom image to better show it's an album
-        // e.g. 4x4 of first 4 items in album, or stack
-       
-        PhotoManager.fetchImage(urlString) { image in
+        // Check to see if we've already cached the image
+        if let image = cachedImages[urlString] {
             cell.album?.coverImage = image
             cell.albumImage?.image = image
             cell.spinner?.stopAnimating()
+        // Otherwise get the image
+        } else {
+            PhotoManager.fetchImage(urlString) { image in
+                self.cachedImages[urlString] = image
+                cell.album?.coverImage = image
+                cell.albumImage?.image = image
+                cell.spinner?.stopAnimating()
+            }
         }
-        
         return cell
     }
     
