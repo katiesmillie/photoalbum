@@ -9,28 +9,38 @@
 import XCTest
 @testable import PhotoAlbum
 
+
 class PhotoAlbumTests: XCTestCase {
+    
+    let photoItem1 = PhotoItem(albumId: 2, id: 56, title: "reprehenderit est deserunt velit ipsam", imageURL: "http://placehold.it/150/dff9f6",  thumbnailURL: "http://placehold.it/600/771796")
+    let photoItem2 = PhotoItem(albumId: 3, id: 30, title: "reprehenderit est deserunt velit ipsam", imageURL: "http://placehold.it/150/dff9f6",  thumbnailURL: "http://placehold.it/600/771796")
+    
+    let sampleData: [[String:AnyObject]] = [["albumId":2,"id":56,"title":"reprehenderit est deserunt velit ipsam","url":"http://placehold.it/150/dff9f6","thumbnailUrl":"http://placehold.it/600/771796"]]
+    
+    var photoItems: [PhotoItem] = []
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        photoItems += [photoItem1, photoItem2]
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
+    
+    func testDecodeItem() {
+        let photoItemsDecoded = PhotoManager.decodeItems(sampleData)
+        XCTAssertEqual(photoItemsDecoded, [photoItem1])
+        XCTAssertNotEqual(photoItemsDecoded, [photoItem2])
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+ 
+    func testGetAlbumsFromItems() {
+        let fetchedAlbums = Album.getAlbumsFromItems(photoItems)
+        let fetchedAlbumIds = fetchedAlbums.map { $0.albumId! }
+        let sortedFetchedAlbumIds = fetchedAlbumIds.sort( < )
+        let albumdIds = [2,3]
+        XCTAssertEqual(albumdIds, sortedFetchedAlbumIds)
+
     }
+  
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
-        }
-    }
     
 }

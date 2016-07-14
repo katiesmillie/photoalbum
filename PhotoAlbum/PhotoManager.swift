@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-
 public struct PhotoManager {
     
     static func decodeItems(items: [[String: AnyObject]]?) -> [PhotoItem] {
@@ -23,7 +22,7 @@ public struct PhotoManager {
             guard let thumbnailURL = item["thumbnailUrl"] as? String else { continue }
             guard let imageURL = item["url"] as? String else { continue }
             
-            let photoItem = PhotoItem(albumId: albumId, id: id, title: title, thumbnailURL: thumbnailURL, imageURL: imageURL)
+            let photoItem = PhotoItem(albumId: albumId, id: id, title: title, imageURL: imageURL, thumbnailURL: thumbnailURL)
             photoItems += [photoItem]
         }
         

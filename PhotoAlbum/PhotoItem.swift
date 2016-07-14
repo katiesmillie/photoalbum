@@ -51,6 +51,14 @@ public struct PhotoItem {
         self.fullImage = fullImage
         self.thumbnailImage = thumbnailImage
     }
-    
-    
 }
+
+public func ==(lhs: PhotoItem, rhs: PhotoItem) -> Bool {
+    return (lhs.albumId == rhs.albumId
+        && lhs.id == rhs.id
+        && lhs.title == rhs.title
+        && lhs.thumbnailURL == rhs.thumbnailURL
+        && lhs.imageURL == rhs.imageURL)
+}
+
+extension PhotoItem: Equatable {}
