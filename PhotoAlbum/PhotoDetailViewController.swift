@@ -9,7 +9,10 @@
 import UIKit
 
 class PhotoDetailViewController: UIViewController, UIScrollViewDelegate {
-
+    
+    var photoItem: PhotoItem?
+    
+    @IBOutlet weak var photoTitle: UILabel?
     @IBOutlet weak var spinner: UIActivityIndicatorView? {
         didSet {
             self.spinner?.hidesWhenStopped = true
@@ -20,7 +23,8 @@ class PhotoDetailViewController: UIViewController, UIScrollViewDelegate {
         didSet {
             scrollView?.contentSize = imageView.frame.size
             scrollView?.delegate = self
-            scrollView?.minimumZoomScale = 0.25
+            scrollView?.minimumZoomScale = 1
+            scrollView?.maximumZoomScale = 3
         }
     }
     
@@ -33,21 +37,24 @@ class PhotoDetailViewController: UIViewController, UIScrollViewDelegate {
         }
         set {
             imageView.image = newValue
-            imageView.sizeToFit()
             imageView.setBorderForImages()
+            
+            // resize the image to the scroll view's width
+            guard let imageWidth = scrollView?.frame.width else { return }
+            imageView.frame = CGRectMake(0, 0, imageWidth, imageWidth)
             scrollView?.contentSize = imageView.frame.size
+            
             self.spinner?.stopAnimating()
         }
     }
-    
-    var photoItem: PhotoItem?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         scrollView?.addSubview(imageView)
-        
-        
-        // pull to refresh
+
+        guard let photoTitleText = photoItem?.title else { return }
+        self.photoTitle?.text = photoTitleText.capitalizedString
     }
     
     override func viewWillAppear(animated: Bool) {
