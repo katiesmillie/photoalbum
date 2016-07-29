@@ -10,15 +10,14 @@ import Foundation
 import UIKit
 
 public struct Album {
-    let albumId: Int?
-    let photoItems: [PhotoItem]?
+    let albumId: Int
+    let photoItems: [PhotoItem]
     var coverImage: UIImage?
     
     // Set coverImage as .NotDownloaded and nil by default
-    init(albumId: Int, photoItems: [PhotoItem], coverImage: UIImage? = nil) {
+    init(albumId: Int, photoItems: [PhotoItem]) {
         self.albumId = albumId
         self.photoItems = photoItems.sort{ $0.id < $1.id }
-        self.coverImage = coverImage
     }
     
     // TODO: Create a custom image for album cover
@@ -36,7 +35,7 @@ public struct Album {
         // Then create an ablum, and add it to the array of albums
         var albums:[Album] = []
         for albumId in uniqueAlbumID {
-            let filteredItems = items.filter { $0.albumId! == Int(albumId) }
+            let filteredItems = items.filter { $0.albumId == Int(albumId) }
             albums += [Album(albumId: albumId, photoItems: filteredItems)]
         }
         return albums

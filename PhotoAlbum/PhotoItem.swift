@@ -10,24 +10,22 @@ import Foundation
 import UIKit
 
 public struct PhotoItem {
-    let albumId: Int?
-    let id: Int?
-    let title: String?
-    let imageURL: String?
-    let thumbnailURL: String?
+    let albumId: Int
+    let id: Int
+    let title: String
+    let imageURL: String
+    let thumbnailURL: String
     var fullImage: UIImage?
     var thumbnailImage: UIImage?
     
     
     // Set the Images as .NotDownloaded and nil by default
-    public init(albumId: Int, id: Int,title: String, imageURL: String, thumbnailURL: String, fullImage: UIImage? = nil, thumbnailImage: UIImage? = nil) {
+    public init(albumId: Int, id: Int,title: String, imageURL: String, thumbnailURL: String) {
         self.albumId = albumId
         self.id = id
         self.title = title
         self.imageURL = imageURL
         self.thumbnailURL = thumbnailURL
-        self.fullImage = fullImage
-        self.thumbnailImage = thumbnailImage
     }
 }
 

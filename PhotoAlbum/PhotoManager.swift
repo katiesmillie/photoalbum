@@ -33,6 +33,9 @@ public struct PhotoManager {
         let request = NSMutableURLRequest(URL: url)
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { (data, response, error) in
+            
+            //TODO: Handle case with error / no connectivity
+            
             let statusCode: Int
             if let response = response as? NSHTTPURLResponse {
                 statusCode = response.statusCode

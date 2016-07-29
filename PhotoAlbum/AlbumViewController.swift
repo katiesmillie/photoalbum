@@ -69,7 +69,7 @@ class AlbumViewController: UIViewController, UICollectionViewDataSource, UIColle
         cell.album = albumAtIndexPath(indexPath)
         
         // For now, use the first thumbnail in the album
-        guard let urlString = cell.album?.photoItems?.first?.thumbnailURL else { return cell }
+        guard let urlString = cell.album?.photoItems.first?.thumbnailURL else { return cell }
         
         // Check to see if we've already cached the image
         if let image = cachedImages[urlString] {
