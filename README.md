@@ -1,4 +1,6 @@
-# photoalbum
+# Photo Album
+
+Created in 2016 for a job interview
 
 Requirements:
 - This code test must be written in Swift 2 or later.
